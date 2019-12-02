@@ -1,32 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <style>
-    </style>
-</head>
-<body>
-    <script>
-        /* Write a constructor for making “book” objects. We will revisit this in the 
-        project at the end of this lesson. Your book objects should have the book’s 
-        title, author, the number of pages, and whether or not you have read the book */
-
-        function Book(title, author, pages, read) {
-            this.title = title;
-            this.author = author;
-            this.pages = pages;
-            this.read = read;
-        }
-
-        Book.prototype.info = function() {
-            if (this.read) {
-                return `${this.title} by ${this.author}, ${this.pages} pages, finished reading.`;
-            } else {
-                return `${this.title} by ${this.author}, ${this.pages} pages, not read yet.`;
-            }
-        }
-
-        const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, true);
-        console.log(theHobbit.info());
-    </script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Booklabs</title>
+    <link href="./assets/css/library.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <h1>Booklabs</h1>
+      <h2>Discover reading</h2>
+    </header>
+    <div class="row">
+      <form>
+        <input value="" placeholder="Book Title">
+        <input value="" placeholder="Author">
+        <input type="number" value="" placeholder="Pages">
+        <select>
+          <option value="Read">Read</option>
+          <option value="Unread">Unread</option>
+        </select>
+      </form>
+      <button type="submit">Add Book</button>
+      <hr>
+    </div>
+    <div class="row">
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Candide</td>
+            <td>Voltaire</td>
+            <td>122</td>
+            <td>
+              <button>Read</button>
+            </td>
+          </tr>
+          <tr>
+              <td>The Hounds of the Baskervilles</td>
+              <td>Sir Arthur Conan Doyle</td>
+              <td>320</td>
+              <td>
+                <button class="unread">Unread</button>
+              </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="./assets/js/library.js"></script>
+  </body>
 </html>
