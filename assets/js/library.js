@@ -1,6 +1,6 @@
-/* Write a constructor for making “book” objects. We will revisit this in the 
-project at the end of this lesson. Your book objects should have the book’s 
-title, author, the number of pages, and whether or not you have read the book */
+// Try to encorporate this program with the goodreads API. Pull in books,
+// manage them from Booklabs, push changes back to goodreads. Add progress
+// bars and other similar functionality that is on goodreads.
 
 // the constructor
 function Book(title, author, pages, read) {
@@ -10,22 +10,79 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-// store books into an array
+function render() {
+    
+    // check if there are values in input fields.
+    if (checkInputs()) {
+        let values = [];
+        for (let element of inputList) {
+            values.push(element.value);
+        }
+
+        let readStatus = false;
+        const index = document.querySelector('select').selectedIndex;
+        if (index == 0) {
+            readStatus = true;
+        }
+
+        addBookToLibrary(...values, readStatus);
+        updateTable(myLibrary[myLibrary.length-1]);
+        resetInputs();
+    }
+    // highlight unfilled input fields
+}
+
 function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(new Book(title, author, pages, read));
 }
 
-Book.prototype.info = function() {
-    if (this.read) {
-        return `${this.title} by ${this.author}, ${this.pages} pages, finished reading.`;
-    } else {
-        return `${this.title} by ${this.author}, ${this.pages} pages, not read yet.`;
+function checkInputs() {
+    for (let element of inputList) {
+        if (element.value == "") {
+            return false;
+        }
     }
+    return true;
+}
+
+function updateTable(book) {
+    const row = document.createElement('tr');
+
+    const title = document.createElement('td');
+    title.textContent = book.title;
+    row.append(title);
+
+    const author = document.createElement('td');
+    author.textContent = book.author;
+    row.append(author);
+
+    const pages = document.createElement('td');
+    pages.textContent = book.pages;
+    row.append(pages);
+
+    const read = document.createElement('button');
+    if (book.read) {
+        read.textContent = "Read";
+    } else {
+        read.textContent = "Unread";
+        read.classList.add('unread');
+    }
+    const cell = document.createElement('td');
+    cell.append(read);
+    row.append(cell);
+   
+    document.querySelector('tbody').append(row);
+}
+
+function resetInputs() {
+    for (let element of inputList) {
+        element.value = "";
+    }
+    document.querySelector('select').selectedIndex = 0;
 }
 
 let myLibrary = [];
-addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, true);
-addBookToLibrary('Candide', 'Voltaire', 123, true);
-addBookToLibrary('The Hounds of the Baskervilles', 'Sir Arthur Conan Doyle', 256, false);
-addBookToLibrary('Emma', 'Jane Austen', 474, false);
-console.table(myLibrary);
+let inputList = Array.from(document.querySelectorAll('input'));
+
+document.querySelector('button').addEventListener('click', render);
+// event listener to change read status on tables back and forth.
