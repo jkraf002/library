@@ -60,9 +60,16 @@ th {
   color: darkslategray;
   padding: 8px 34px 8px 0;
   text-align: left;
+  border-bottom: 2px solid lightgray;
+  border-right: 2px solid transparent;
+  border-left: 2px solid transparent;
 }
 td {
   padding: 5px 0;
+  border-top: 1px solid lightgray;
+}
+table {
+  border-collapse: collapse;
 }
 
 
@@ -76,7 +83,7 @@ td > button {
 
 /* 0, 1, 0 specificity */
 .row {
-  width: 900px;
+  width: 624px;
   margin-top: 30px;
   margin-left: 50px;
 }
@@ -105,5 +112,5 @@ th:nth-child(4) {
   padding-right: 0;
 }
 tr:nth-child(2n) {
-  background-color: rgba(128, 128, 128, 0.158);
+  background-color: rgba(211, 211, 211, 0.125);
 }

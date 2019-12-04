@@ -10,6 +10,20 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
+function toggleRead(e) {
+    if (e.target.classList.contains('unread')) {
+        e.target.classList.remove('unread');
+        e.target.textContent = "Read";
+        myLibrary[Number(e.target.id)].read = true;
+        // change object property to true
+    } else {
+        e.target.classList.add('unread');
+        e.target.textContent = "Unread";
+        myLibrary[Number(e.target.id)].read = false;
+        // change object property to false
+    }
+}
+
 function render() {
     
     // check if there are values in input fields.
@@ -61,12 +75,15 @@ function updateTable(book) {
     row.append(pages);
 
     const read = document.createElement('button');
+    read.setAttribute('id', `${myLibrary.length-1}`);
     if (book.read) {
         read.textContent = "Read";
     } else {
         read.textContent = "Unread";
         read.classList.add('unread');
     }
+    read.addEventListener('click', toggleRead);
+
     const cell = document.createElement('td');
     cell.append(read);
     row.append(cell);
@@ -82,7 +99,15 @@ function resetInputs() {
 }
 
 let myLibrary = [];
-let inputList = Array.from(document.querySelectorAll('input'));
+myLibrary.push(new Book('The Very Hungry Caterpillar', 'Eric Carle', 26, true));
+updateTable(myLibrary[0]);
+myLibrary.push(new Book('The Hounds of the Baskervilles', 'Sir Arthur Conan Doyle', 320, false));
+updateTable(myLibrary[1]);
+
+const inputList = Array.from(document.querySelectorAll('input'));
 
 document.querySelector('button').addEventListener('click', render);
-// event listener to change read status on tables back and forth.
+statusButtons = Array.from(document.querySelectorAll('button.status'));
+for (let button of statusButtons) {
+    button.addEventListener('click', toggleRead);
+}
