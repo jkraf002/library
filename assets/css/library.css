@@ -61,8 +61,8 @@ th {
   padding: 8px 34px 8px 0;
   text-align: left;
   border-bottom: 2px solid lightgray;
-  border-right: 2px solid transparent;
-  border-left: 2px solid transparent;
+  border-right: 1px solid transparent;
+  border-left: 1px solid transparent;
 }
 td {
   padding: 5px 0;
@@ -88,7 +88,29 @@ td > button {
   margin-left: 50px;
 }
 .unread {
-  background-color: rgba(128, 0, 0, 0.85);
+  background-color: white;
+  border-color: darkslategray;
+  color: darkslategray;
+}
+.delete {
+  height: 20px;
+  width: 20px;
+  padding: 0;
+  margin: 4px 0 0 0;
+  border-radius: 0;
+  opacity: 50%;
+  background-color: lightgray;
+  border-color: transparent;
+}
+
+
+/* 0, 2, 0 specificity */
+.delete:hover {
+  opacity: 100%;
+  background-color: darkslategray;
+  border-color: darkslategray;
+  color: white;
+  transform: none;
 }
 
 /* 0, 1, 1 specificity */
@@ -99,18 +121,35 @@ input:nth-child(2) {
   width: 140px;
 }
 th:first-child {
-  width: 218px;
+  border-bottom: transparent;
 }
 th:nth-child(2) {
-  width: 148px;
+  width: 220px;
 }
 th:nth-child(3) {
-  width: 78px;
+  width: 148px;
 }
 th:nth-child(4) {
+  width: 79px;
+}
+th:nth-child(5) {
   width: 70px;
   padding-right: 0;
 }
 tr:nth-child(2n) {
   background-color: rgba(211, 211, 211, 0.125);
+}
+td:first-child {
+  border-top: transparent;
+  background-color: white;
+}
+button:hover {
+  transform: scale(1.05);
+}
+
+
+/* 1, 0, 0 specificity */
+#tableDiv {
+  margin-left: 15px;
+  width: 1000px;
 }

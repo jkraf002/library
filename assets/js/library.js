@@ -24,6 +24,12 @@ function toggleRead(e) {
     }
 }
 
+function removeBook(e) {
+    const rowIndex = Number(e.target.id) + 1; // Avoid header row
+    const table = document.querySelector('table');
+    table.deleteRow(rowIndex);
+}
+
 function render() {
     
     // check if there are values in input fields.
@@ -60,7 +66,17 @@ function checkInputs() {
 }
 
 function updateTable(book) {
+    const index = myLibrary.length - 1;
     const row = document.createElement('tr');
+
+    const clear = document.createElement('button');
+    clear.textContent = 'X';
+    clear.setAttribute('id', `${index}`);
+    clear.classList.add('delete');
+    clear.addEventListener('click', removeBook);
+    const tmpCell = document.createElement('td');
+    tmpCell.append(clear);
+    row.append(tmpCell);
 
     const title = document.createElement('td');
     title.textContent = book.title;
@@ -75,7 +91,7 @@ function updateTable(book) {
     row.append(pages);
 
     const read = document.createElement('button');
-    read.setAttribute('id', `${myLibrary.length-1}`);
+    read.setAttribute('id', `+${index}`);
     if (book.read) {
         read.textContent = "Read";
     } else {
