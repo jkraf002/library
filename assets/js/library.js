@@ -2,12 +2,16 @@
 // manage them from Booklabs, push changes back to goodreads. Add progress
 // bars and other similar functionality that is on goodreads.
 
+// Further assignment: convert factory functions into Classes
+
 // the constructor
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 }
 
 function toggleRead(e) {
